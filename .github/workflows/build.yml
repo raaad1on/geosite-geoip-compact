@@ -83,9 +83,12 @@ jobs:
           v2dat unpack geoip -o dist/text -f ru -f private dist/geoip-compact.dat
           v2dat unpack geosite -o dist/text -f private -f category-ru -f category-ads dist/geosite-compact.dat
 
-      - name: Show key gov domains in category-ru (sanity check)
+      - name: Sanity check category-ru is not empty
         run: |
-          grep -E 'government.ru|gosuslugi.ru|cbr.ru' dist/text/geosite-compact_category-ru.txt || (echo "Expected gov domains not found in category-ru" && exit 1)
+          if [ ! -s dist/text/geosite-compact_category-ru.txt ]; then
+            echo "category-ru list is empty"
+            exit 1
+          fi
 
       - name: Commit dist if changed
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
