@@ -50,25 +50,26 @@ jobs:
         run: |
           python3 scripts/flatten_category_ru.py domain-list-community/data
 
+      - name: Regenerate dlc.dat from flattened data
+        run: |
+          cd domain-list-community
+          go run ./
+
       - name: Download upstream geoip.dat and geosite.dat
         run: |
           mkdir -p work
           curl -L -o work/geoip.dat https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
           curl -L -o work/geosite.dat https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat
 
-      - name: Unpack private and category-ads from geosite.dat
-        run: |
-          mkdir -p work/unpack
-          v2dat unpack geosite -o work/unpack -f private -f category-ads work/geosite.dat
-
-      - name: Build custom compact geosite (flat category-ru)
+      - name: Build compact geosite.dat from dlc (flat category-ru)
         run: |
           mkdir -p dist
-          go run ./cmd/build-geosite-flat \
-            -private work/unpack/geosite_private.txt \
-            -category-ads work/unpack/geosite_category-ads.txt \
-            -category-ru domain-list-community/data/category-ru \
-            -output dist/geosite-compact.dat
+          geoview -type geosite -action convert \
+            -input domain-list-community/dlc.dat \
+            -list "private,category-ru,category-ads,PRIVATE,CATEGORY-RU,CATEGORY-ADS" \
+            -output dist/geosite-compact.dat \
+            -format geosite \
+            -strict=false
 
       - name: Build compact geoip.dat (RU, PRIVATE)
         run: |
