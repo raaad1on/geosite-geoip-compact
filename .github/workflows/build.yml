@@ -1,0 +1,115 @@
+name: Build compact geosite and geoip
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths-ignore:
+      - 'dist/**'
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Prepare GOPATH and PATH
+        run: |
+          echo "GOPATH=$HOME/go" >> $GITHUB_ENV
+          echo "$HOME/go/bin" >> $GITHUB_PATH
+
+      - name: Install tools (geoview, v2dat)
+        run: |
+          go install github.com/snowie2000/geoview@v0.2.5
+          go install github.com/urlesistiana/v2dat@latest
+
+      - name: Clone domain-list-community
+        run: |
+          git clone --depth=1 https://github.com/v2fly/domain-list-community.git
+
+      - name: Flatten category-ru with all includes
+        run: |
+          python3 scripts/flatten_category_ru.py domain-list-community/data
+
+      - name: Download upstream geoip.dat and geosite.dat
+        run: |
+          mkdir -p work
+          curl -L -o work/geoip.dat https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
+          curl -L -o work/geosite.dat https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat
+
+      - name: Unpack private and category-ads from geosite.dat
+        run: |
+          mkdir -p work/unpack
+          v2dat unpack geosite -o work/unpack -f private -f category-ads work/geosite.dat
+
+      - name: Build custom compact geosite (flat category-ru)
+        run: |
+          mkdir -p dist
+          go run ./cmd/build-geosite-flat \
+            -private work/unpack/geosite_private.txt \
+            -category-ads work/unpack/geosite_category-ads.txt \
+            -category-ru domain-list-community/data/category-ru \
+            -output dist/geosite-compact.dat
+
+      - name: Build compact geoip.dat (RU, PRIVATE)
+        run: |
+          mkdir -p dist
+          geoview -type geoip -action convert -input work/geoip.dat -list "RU,PRIVATE" -output dist/geoip-compact.dat -format geoip -strict=false
+
+      - name: Export text lists for verification
+        run: |
+          mkdir -p dist/text
+          v2dat unpack geoip -o dist/text -f ru -f private dist/geoip-compact.dat
+          v2dat unpack geosite -o dist/text -f private -f category-ru -f category-ads dist/geosite-compact.dat
+
+      - name: Show key gov domains in category-ru (sanity check)
+        run: |
+          grep -E 'government.ru|gosuslugi.ru|cbr.ru' dist/text/geosite-compact_category-ru.txt || (echo "Expected gov domains not found in category-ru" && exit 1)
+
+      - name: Commit dist if changed
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        run: |
+          if [ -n "$(git status --porcelain dist)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add dist
+            git commit -m "Update compact geosite/geoip [skip ci]"
+            git push
+            echo "should_release=true" >> $GITHUB_ENV
+          else
+            echo "No changes in dist, nothing to commit."
+            echo "should_release=false" >> $GITHUB_ENV
+          fi
+
+      - name: Prepare release tag
+        if: env.should_release == 'true'
+        run: |
+          TAG="v$(date -u +%Y%m%d-%H%M%S)"
+          echo "RELEASE_TAG=$TAG" >> $GITHUB_ENV
+
+      - name: Create GitHub Release
+        if: env.should_release == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          name: ${{ env.RELEASE_TAG }}
+          files: |
+            dist/geoip-compact.dat
+            dist/geosite-compact.dat
+
