@@ -36,7 +36,7 @@ jobs:
 
       - name: Install tools (geoview, v2dat)
         run: |
-          go install github.com/snowie2000/geoview@v0.2.5
+          go install github.com/snowie2000/geoview@latest
           go install github.com/urlesistiana/v2dat@latest
 
       - name: Clone domain-list-community
