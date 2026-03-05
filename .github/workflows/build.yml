@@ -105,18 +105,13 @@ jobs:
             echo "should_release=false" >> $GITHUB_ENV
           fi
 
-      - name: Prepare release tag
-        if: env.should_release == 'true'
-        run: |
-          TAG="v$(date -u +%Y%m%d-%H%M%S)"
-          echo "RELEASE_TAG=$TAG" >> $GITHUB_ENV
-
       - name: Create GitHub Release
         if: env.should_release == 'true'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ env.RELEASE_TAG }}
-          name: ${{ env.RELEASE_TAG }}
+          tag_name: latest
+          name: latest
+          make_latest: true
           files: |
             dist/geoip-compact.dat
             dist/geosite-compact.dat
