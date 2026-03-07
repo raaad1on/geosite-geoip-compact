@@ -141,4 +141,5 @@ yandexwebcache.org
 yastat.net
 yastatic.net
 yclients.com
+youla.io
 full:yandex-pogoda.static-storage.net
