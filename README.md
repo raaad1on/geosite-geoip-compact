@@ -4,119 +4,62 @@
 
 ### Идея
 
-- **Сохранить совместимость конфига**:
-  - вы по‑прежнему используете только:
-    - `geoip:ru`, `geoip:private`
-    - `geosite:private`, `geosite:category-ru`, `geosite:category-ads`
-  - конфиг вида:
-    ```json
-    "DirectIp": [
-      "geoip:private",
-      "geoip:ru"
-    ],
-    "DirectSites": [
-      "geosite:private",
-      "geosite:category-ru"
-    ],
-    "BlockSites": [
-      "geosite:category-ads"
-    ]
-    ```
-    остаётся без изменений.
+- **Совместимость конфига** — те же теги в правилах:
+  - `geoip:ru`, `geoip:private`
+  - `geosite:private`, **`geosite:category-ru`**, `geosite:category-ads`
+- **Один тег `geosite:category-ru`** объединяет:
+  1. Плоский **`category-ru`** из [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community) (все `include:` развёрнуты рекурсивно).
+  2. Дополнительно правила из [runetfreedom/russia-v2ray-rules-dat](https://github.com/runetfreedom/russia-v2ray-rules-dat) (`release/geosite.dat`):
+     - **`category-gov-ru`**
+     - **`ru-available-only-inside`** (домены, доступные только из РФ)
+  3. Слияние **без повторов** (одинаковые строки правил отбрасываются).
+- **`private`** и **`category-ads`** — из собранного `dlc.dat` community (как в `geoview`).
+- **GeoIP** — срез [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) только по **`RU`** и **`PRIVATE`**; перед релизом проверяется, что в `geoip-compact.dat` непустой список **`ru`**.
 
-- **Урезать базы**, оставив только нужные теги.
-- **Корректно развернуть все `include:` для `category-ru`** рекурсивно (любой глубины), чтобы
-  `geosite:category-ru` фактически включал:
-  - `tld-ru`
-  - `category-ecommerce-ru`
-  - `category-entertainment-ru`
-  - `category-gov-ru`
-  - `category-retail-ru`
-  - `category-travel-ru`
-  - `mailru-group`
-  - `yandex`
-  - `category-bank-ru`
-  - и все их вложения (например `avito`, `ozon`, `wildberries`, gov-домены и т.д.).
+### Как это собирается (GitHub Actions)
 
-### Как это собирается в GitHub Actions
+Файл: `.github/workflows/build.yml`.
 
-Workflow: `.github/workflows/build.yml`.
-
-1. **Клонируем** [`v2fly/domain-list-community`](https://github.com/v2fly/domain-list-community).
-2. **Плоско разворачиваем `category-ru`**:
-   - скрипт `scripts/flatten_category_ru.py` рекурсивно обходит все `include:` в `data/category-ru`
-     и связанных файлах (включая [`category-gov-ru`](https://raw.githubusercontent.com/v2fly/domain-list-community/master/data/category-gov-ru)),
-     и генерирует новый `data/category-ru` без `include:`, только с доменными правилами.
-3. **Скачиваем оригинальные базы Loyalsoldier**:
-   - `geoip.dat`, `geosite.dat` из `Loyalsoldier/v2ray-rules-dat`.
-4. **Из `geosite.dat` распаковываем** только:
-   - `private`
-   - `category-ads`
-   с помощью `v2dat` (в текстовый формат).
-5. **Собираем свой `geosite-compact.dat`** (Go-программа `cmd/build-geosite-flat`):
-   - тег `private` — из `geosite_private.txt`;
-   - тег `category-ads` — из `geosite_category-ads.txt`;
-   - тег `category-ru` — из плоского `domain-list-community/data/category-ru`
-     (со всеми рекурсивными `include:`).
-6. **Собираем компактный `geoip-compact.dat`** через `geoview`:
-   - оставляем только `RU` и `PRIVATE`.
-7. **Экспортируем текстовые списки** для верификации:
-   - `dist/text/geoip-compact_private.txt`
-   - `dist/text/geoip-compact_ru.txt`
-   - `dist/text/geosite-compact_private.txt`
-   - `dist/text/geosite-compact_category-ru.txt`
-   - `dist/text/geosite-compact_category-ads.txt`
-8. **Коммитим результат в `dist/`** в этот же репозиторий (без использования каких‑либо секретов;
-   только стандартный `GITHUB_TOKEN`).
-
-Workflow запускается:
-
-- по `push` в `main/master` (кроме изменений только в `dist/**`);
-- по расписанию (cron);
-- вручную через `workflow_dispatch`.
+1. Клон **domain-list-community**.
+2. **`scripts/flatten_category_ru.py`** — плоский `data/category-ru` из v2fly (рекурсивные `include:`).
+3. Скачать **`geosite.dat`** с [raw …/russia-v2ray-rules-dat/release/geosite.dat](https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/geosite.dat).
+4. **v2dat unpack** тегов `category-gov-ru`, `ru-available-only-inside`.
+5. **`scripts/merge_runetfreedom_into_category_ru.py`** — дописывает в `category-ru` правила RunetFreedom, **дедупликация**.
+6. **`go run ./`** в `domain-list-community` → **`dlc.dat`**.
+7. Скачать **`geoip.dat`** Loyalsoldier.
+8. **geoview** → `dist/geosite-compact.dat` (теги `private`, `category-ru`, `category-ads`) и `dist/geoip-compact.dat` (`RU`, `PRIVATE`).
+9. Проверка: **v2dat** распаковывает `ru` из `geoip-compact.dat` (не пусто).
+10. Экспорт текстов в **`dist/text/`** для контроля.
+11. Коммит **`dist/`** при изменениях (`[skip ci]`).
+12. **GitHub Release** `latest` с артефактами:
+    - при коммите в `dist` после push;
+    - **каждый день по cron** (03:00 UTC) и при **`workflow_dispatch`** — даже если бинарники совпали с предыдущей сборкой (артефакты всё равно выкладываются).
 
 ### Структура `dist/`
 
-- `dist/geoip-compact.dat` — бинарный GeoIP для Xray:
-  - содержит только теги `RU` и `PRIVATE`.
-- `dist/geosite-compact.dat` — бинарный GeoSite для Xray:
-  - теги:
-    - `private`
-    - `category-ru` (со всеми `include:` и вложениями)
-    - `category-ads`
-- `dist/text/` — человекочитаемые экспортированные списки (для проверки/отладки).
+- `dist/geoip-compact.dat` — только **`RU`**, **`PRIVATE`**.
+- `dist/geosite-compact.dat` — **`private`**, **`category-ru`** (v2fly + RunetFreedom gov + only-inside, дедуп), **`category-ads`**.
+- `dist/text/` — текстовые дампы для проверки.
 
-### Как использовать в Xray
-
-Подставьте в конфиг Xray пути/URL до файлов из этого репозитория, например:
+### Пример в Xray
 
 ```json
 "routing": {
-  "geoip": {
-    "path": "/path/to/geoip-compact.dat"
-  },
-  "geosite": {
-    "path": "/path/to/geosite-compact.dat"
-  }
+  "geoip": { "path": "/path/to/geoip-compact.dat" },
+  "geosite": { "path": "/path/to/geosite-compact.dat" }
 }
 ```
 
-и оставьте ваши правила такими, как сейчас:
-
 ```json
-"DirectIp": [
-  "geoip:private",
-  "geoip:ru"
-],
-"DirectSites": [
-  "geosite:private",
-  "geosite:category-ru"
-],
-"BlockSites": [
-  "geosite:category-ads"
-]
+"DirectIp": ["geoip:private", "geoip:ru"],
+"DirectSites": ["geosite:private", "geosite:category-ru"],
+"BlockSites": ["geosite:category-ads"]
 ```
 
-Никаких чувствительных данных в репозиторий не отправляется: используются только публичные списки
-и их производные бинарные файлы.
+Используются только публичные списки и производные бинарники; секреты не нужны (`GITHUB_TOKEN`).
 
+### Локальные скрипты
+
+- `scripts/flatten_category_ru.py` — развернуть `include:` для v2fly `category-ru`.
+- `scripts/merge_runetfreedom_into_category_ru.py` — подмешать RunetFreedom **после** flatten.
+- `scripts/flatten_geosite_includes.py` — развернуть `include:` в текстовых списках v2dat (вспомогательно).

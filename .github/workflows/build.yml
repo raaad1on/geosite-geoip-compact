@@ -9,6 +9,7 @@ on:
       - 'dist/**'
   workflow_dispatch:
   schedule:
+    # Ежедневно 03:00 UTC
     - cron: '0 3 * * *'
 
 permissions:
@@ -47,22 +48,40 @@ jobs:
         run: |
           git clone --depth=1 https://github.com/v2fly/domain-list-community.git
 
-      - name: Flatten category-ru with all includes
+      - name: Flatten category-ru with all includes (v2fly)
         run: |
           python3 scripts/flatten_category_ru.py domain-list-community/data
 
-      - name: Regenerate dlc.dat from flattened data
+      - name: Download RunetFreedom geosite.dat
+        run: |
+          mkdir -p work
+          curl -fsSL -o work/runetfreedom-geosite.dat \
+            https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/geosite.dat
+
+      - name: Unpack RunetFreedom lists for merge
+        run: |
+          v2dat unpack geosite -o work/runetfreedom-unpack \
+            -f category-gov-ru -f ru-available-only-inside \
+            work/runetfreedom-geosite.dat
+
+      - name: Merge RunetFreedom into category-ru (deduped)
+        run: |
+          python3 scripts/merge_runetfreedom_into_category_ru.py \
+            domain-list-community/data/category-ru \
+            work/runetfreedom-unpack
+
+      - name: Regenerate dlc.dat from merged data
         run: |
           cd domain-list-community
           go run ./
 
-      - name: Download upstream geoip.dat and geosite.dat
+      - name: Download upstream geoip.dat (Loyalsoldier)
         run: |
           mkdir -p work
-          curl -L -o work/geoip.dat https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
-          curl -L -o work/geosite.dat https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat
+          curl -fsSL -o work/geoip.dat \
+            https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
 
-      - name: Build compact geosite.dat from dlc (flat category-ru)
+      - name: Build compact geosite.dat from dlc
         run: |
           mkdir -p dist
           geoview -type geosite -action convert \
@@ -75,7 +94,23 @@ jobs:
       - name: Build compact geoip.dat (RU, PRIVATE)
         run: |
           mkdir -p dist
-          geoview -type geoip -action convert -input work/geoip.dat -list "RU,PRIVATE" -output dist/geoip-compact.dat -format geoip -strict=false
+          geoview -type geoip -action convert \
+            -input work/geoip.dat \
+            -list "RU,PRIVATE" \
+            -output dist/geoip-compact.dat \
+            -format geoip \
+            -strict=false
+
+      - name: Verify geoip-compact contains tag ru
+        run: |
+          mkdir -p work/geoip-verify
+          v2dat unpack geoip -o work/geoip-verify -f ru dist/geoip-compact.dat
+          f=$(ls work/geoip-verify/*_ru.txt)
+          if [ ! -s "$f" ]; then
+            echo "geoip-compact: empty ru list"
+            exit 1
+          fi
+          echo "geoip ru rules: $(wc -l < "$f")"
 
       - name: Export text lists for verification
         run: |
@@ -105,8 +140,14 @@ jobs:
             echo "should_release=false" >> $GITHUB_ENV
           fi
 
-      - name: Create GitHub Release
-        if: env.should_release == 'true'
+      - name: Release on schedule / manual (even if dist unchanged)
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: echo "force_release=true" >> $GITHUB_ENV
+
+      - name: Create or update GitHub Release
+        if: |
+          (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') &&
+          (env.should_release == 'true' || env.force_release == 'true')
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
@@ -115,4 +156,3 @@ jobs:
           files: |
             dist/geoip-compact.dat
             dist/geosite-compact.dat
-
