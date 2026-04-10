@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""
+Устарело для CI: не повторяет resolveList / фильтры @ на include / polishList из domain-list-community.
+Оставлено для локальных экспериментов. CI использует append_runet_extras_to_category_ru.py + официальный go run ./.
+"""
 import sys
 import pathlib
 

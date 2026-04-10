@@ -48,30 +48,45 @@ jobs:
         run: |
           git clone --depth=1 https://github.com/v2fly/domain-list-community.git
 
-      - name: Flatten category-ru with all includes (v2fly)
+      - name: Save pristine category-ru (includes intact)
         run: |
-          python3 scripts/flatten_category_ru.py domain-list-community/data
+          mkdir -p work
+          cp domain-list-community/data/category-ru work/category-ru.original
+
+      # Эталон: полный resolve / @-фильтры / polishList в официальном коде v2fly
+      - name: Build reference dlc.dat
+        run: |
+          cd domain-list-community
+          go run ./
+
+      - name: Unpack official category-ru from dlc.dat
+        run: |
+          mkdir -p work/dlc-unpack
+          v2dat unpack geosite -o work/dlc-unpack -f category-ru domain-list-community/dlc.dat
 
       - name: Download RunetFreedom geosite.dat
         run: |
-          mkdir -p work
           curl -fsSL -o work/runetfreedom-geosite.dat \
             https://raw.githubusercontent.com/runetfreedom/russia-v2ray-rules-dat/release/geosite.dat
 
-      - name: Unpack RunetFreedom lists for merge
+      - name: Unpack RunetFreedom lists
         run: |
           mkdir -p work/runetfreedom-unpack
           v2dat unpack geosite -o work/runetfreedom-unpack \
-            -f category-gov-ru -f ru-available-only-inside \
+            -f category-ru -f category-gov-ru -f ru-available-only-inside \
             work/runetfreedom-geosite.dat
 
-      - name: Merge RunetFreedom into category-ru (deduped)
+      # Не заменяем весь category-ru плоским списком (повторный polishList съедает правила).
+      # Дописываем только отсутствующие в официальном unpack строки RunetFreedom.
+      - name: Append RunetFreedom extras to category-ru
         run: |
-          python3 scripts/merge_runetfreedom_into_category_ru.py \
-            domain-list-community/data/category-ru \
-            work/runetfreedom-unpack
+          python3 scripts/append_runet_extras_to_category_ru.py \
+            work/category-ru.original \
+            work/dlc-unpack/dlc_category-ru.txt \
+            work/runetfreedom-unpack \
+            -o domain-list-community/data/category-ru
 
-      - name: Regenerate dlc.dat from merged data
+      - name: Rebuild dlc.dat with extended category-ru
         run: |
           cd domain-list-community
           go run ./
@@ -163,7 +178,8 @@ jobs:
             echo ""
             echo "### Состав"
             echo "- \`geoip-compact.dat\`, \`geosite-compact.dat\` — для Xray (geoip: ru/private; geosite: private, category-ru, category-ads)."
-            echo "- \`*.txt\` — те же списки в текстовом виде (v2dat unpack)."
+            echo "- \`category-ru\` = v2fly исходник с include + доп. строки RunetFreedom (см. \`append_runet_extras_to_category_ru.py\`)."
+            echo "- \`*.txt\` — распакованные списки (v2dat unpack)."
           } > release_notes.md
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
