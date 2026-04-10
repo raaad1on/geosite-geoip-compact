@@ -60,6 +60,7 @@ jobs:
 
       - name: Unpack RunetFreedom lists for merge
         run: |
+          mkdir -p work/runetfreedom-unpack
           v2dat unpack geosite -o work/runetfreedom-unpack \
             -f category-gov-ru -f ru-available-only-inside \
             work/runetfreedom-geosite.dat
