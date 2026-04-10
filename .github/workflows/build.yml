@@ -126,7 +126,9 @@ jobs:
             exit 1
           fi
 
+      # GITHUB_ENV нельзя использовать в if: следующего шага — только job outputs / step outputs.
       - name: Commit dist if changed
+        id: commit_dist
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         run: |
           if [ -n "$(git status --porcelain dist)" ]; then
@@ -135,20 +137,19 @@ jobs:
             git add dist
             git commit -m "Update compact geosite/geoip [skip ci]"
             git push
-            echo "should_release=true" >> $GITHUB_ENV
+            echo "dist_committed=true" >> $GITHUB_OUTPUT
           else
             echo "No changes in dist, nothing to commit."
-            echo "should_release=false" >> $GITHUB_ENV
+            echo "dist_committed=false" >> $GITHUB_OUTPUT
           fi
-
-      - name: Release on schedule / manual (even if dist unchanged)
-        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
-        run: echo "force_release=true" >> $GITHUB_ENV
 
       - name: Create or update GitHub Release
         if: |
           (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') &&
-          (env.should_release == 'true' || env.force_release == 'true')
+          (steps.commit_dist.outputs.dist_committed == 'true' ||
+           github.event_name == 'schedule' ||
+           github.event_name == 'workflow_dispatch' ||
+           github.event_name == 'push')
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
