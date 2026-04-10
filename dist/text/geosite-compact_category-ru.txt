@@ -36,6 +36,7 @@ aviasales.com
 avito.st
 avs.io
 beeline.tv
+bitrix.info
 boosty.to
 bps-sberbank.by
 browser-updater.yandex.net
@@ -134,6 +135,7 @@ sberbank.com
 sbercloud.tech
 sbermarketing.ru
 shedevrum.ai
+showip.net
 sistema-capital.com
 smartmed.pro
 smotreshka.tv
