@@ -143,6 +143,33 @@ jobs:
             echo "dist_committed=false" >> $GITHUB_OUTPUT
           fi
 
+      # Тег latest должен указывать на коммит этой сборки (в т.ч. после коммита dist), иначе в UI релиз «старый».
+      - name: Prepare GitHub Release (notes + tag latest → HEAD)
+        id: release_prep
+        if: |
+          (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') &&
+          (steps.commit_dist.outputs.dist_committed == 'true' ||
+           github.event_name == 'schedule' ||
+           github.event_name == 'workflow_dispatch' ||
+           github.event_name == 'push')
+        run: |
+          set -e
+          HEAD_SHA="$(git rev-parse HEAD)"
+          {
+            echo "**Сборка (UTC):** $(date -u +'%Y-%m-%d %H:%M:%S')"
+            echo "**Коммит:** \`${HEAD_SHA}\`"
+            echo "**Событие:** \`${{ github.event_name }}\`"
+            echo "**Workflow:** [#${{ github.run_number }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+            echo ""
+            echo "### Состав"
+            echo "- \`geoip-compact.dat\`, \`geosite-compact.dat\` — для Xray (geoip: ru/private; geosite: private, category-ru, category-ads)."
+            echo "- \`*.txt\` — те же списки в текстовом виде (v2dat unpack)."
+          } > release_notes.md
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -fa latest "${HEAD_SHA}" -m "Latest compact geo build"
+          git push -f origin refs/tags/latest
+
       - name: Create or update GitHub Release
         if: |
           (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') &&
@@ -155,6 +182,9 @@ jobs:
           tag_name: latest
           name: latest
           make_latest: true
+          body_path: release_notes.md
+          overwrite_files: true
           files: |
             dist/geoip-compact.dat
             dist/geosite-compact.dat
+            dist/text/*.txt
