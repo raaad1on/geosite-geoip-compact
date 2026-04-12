@@ -98,6 +98,7 @@ hiwifi.com
 home.arpa
 internal
 invalid
+kis.v2.scr.kaspersky-labs.com
 lan
 leike.cc
 local
@@ -117,6 +118,7 @@ ts.net
 zte.home
 full:asusrouter.com
 full:instant.arubanetworks.com
+full:local.adguard.org
 full:miwifi.com
 full:oasisauth.h3c.com
 full:router.asus.com
