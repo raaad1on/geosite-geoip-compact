@@ -5,6 +5,7 @@
 a.adtng.com
 a.alimama.cn
 a.market.xiaomi.com
+a.mts.ru
 a.youdao.com
 aaid.umeng.com
 aaxads.com
@@ -471,6 +472,7 @@ new-aaid.umeng.com.gds.alibabadns.com
 new-aaid.umeng.com
 nsclick.baidu.com
 nsclickvideo.baidu.com
+obs.mts.ru
 oc.umeng.com
 oct.pocoiq.cn
 onesignal.com
@@ -783,6 +785,7 @@ full:sentry-ng.g.smailru.net
 full:sentry.dev-my.com
 full:sentry.dev-my.games
 full:sentry.hetzner.company
+full:sentry.iptv.rt.ru
 full:sentry.kontur.host
 full:sentry.mindbox.ru
 full:sentry.ozon.ru
