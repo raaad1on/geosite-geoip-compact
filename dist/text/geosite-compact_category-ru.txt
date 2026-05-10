@@ -22,6 +22,7 @@ ad.mail.ru
 adfox.ru
 adfox.yandex.ru
 admetrica.ru
+adriver.ru
 ads.sber.ru
 ads.viqeo.tv
 ads.yandex.ru
@@ -225,6 +226,7 @@ jivochat.es
 jivochat.ng
 jivosite.com
 jump.taxi
+justveryok.com
 kaspersky-labs.com
 kaspersky.be
 kaspersky.ca
@@ -260,6 +262,7 @@ kaspersky.pt
 kaspersky.ro
 kaspersky.rs
 kaspersky.se
+keyboardmen.com
 kinescopecdn.net
 kinorium.com
 knightspeak.com
@@ -321,6 +324,14 @@ neon.click
 netmonet.co
 ngenix.net
 obs.mts.ru
+odnoklasniki.by
+odnoklasniki.ua
+odnoklassniki.am
+odnoklassniki.by
+odnoklassniki.co.ee
+odnoklassniki.eu
+odnoklassniki.lv
+odnoklassniki.tj
 ognihome.com
 ok.me
 okko.sport
@@ -361,7 +372,9 @@ prodcontest.com
 promodj.com
 psk
 pushgrow.io
+pz.help
 r.mail.ru
+rabbitcounter.com
 rabota.by
 radar.imgsmail.ru
 relap.mail.ru
@@ -383,6 +396,7 @@ s.mindbox.ru
 saas-support.com
 safeliner.tech
 sage-observability.tech
+sayeasy.eu
 sber-bank.by
 sber.pro
 sberauto.com
