@@ -917,6 +917,7 @@ full:ksn-url-geo.kaspersky-labs.com
 full:ksn-url.geoksn.kaspersky.com
 full:ksn-verdict-geo.kaspersky-labs.com
 full:ksn-verdict.geoksn.kaspersky.com
+full:log.strm.yandex.ru
 full:loyalnost-adv.ozon.ru
 full:marketing-info.wildberries.ru
 full:marketplace-sentry.wb.ru
@@ -994,6 +995,7 @@ full:sentry.wb.ru
 full:sentry.x5.ru
 full:srch-telemeter10.g.smailru.net
 full:stacks.vk-portal.net
+full:stats.avito.ru
 full:stats.dahlmessenger.com
 full:stats.dev.telega.info
 full:stats.rustore.ru
