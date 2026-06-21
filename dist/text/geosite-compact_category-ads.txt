@@ -381,6 +381,7 @@ imp.go.sohu.com
 impact-ad.jp
 inner-active.mobi
 innovid.com
+insights-collector.gog.com
 inte.sogou.com
 inte.sogoucdn.com
 ipinyou.com
@@ -660,6 +661,7 @@ yfanads.com
 yk-ssp.ad.youku.com
 ykad-data.youku.com
 ylog.hiido.com
+youdaoads.com
 ysm.yahoo.com
 z.gds.cnzz.com
 zhihu-web-analytics.zhihu.com

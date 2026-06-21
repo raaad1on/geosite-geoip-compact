@@ -1,5 +1,5 @@
 
-╟и
+ри
 CATEGORY-ADS2mdn-cn.net
 ads2mdn.net
 ads	51.la51y5.neta.adtng.coma.alimama.cn
@@ -148,8 +148,7 @@ adv.vk.com
 adsanalytics-data.ioanalytics.163.com
 ads(analytics.cloud.unity3d.com
 ads#analytics.facebook.com
-ads*analytics.tiktok.com
-!cn
+ads!analytics.tiktok.com
 adsanalytics.umetrip.comanalytics.vk.com
 ads'analytics.vpc.duolingo.com
 ads%api-adservices.apple.com
@@ -185,9 +184,8 @@ applvn.com"appmetrica.yandex.com
 ads	beizi.bizbingads.com
 adsbiz.weibo.com
 adsbluekai.com
-ads/browser.events.data.msn.cn
-ads
-cn(browser.events.data.msn.com
+ads'browser.events.data.msn.cn
+ads(browser.events.data.msn.com
 adsbs.yandex.ru
 adsbtrace.qq.com
 adsbugly.qq.com
@@ -241,8 +239,7 @@ clarity.ms
 adsdoubleclick.com
 adsdoubleclick.net
 adsdrmcmm.baidu.com
-ads&dt.dbankcloud.ru
-!cn
+adsdt.dbankcloud.ru
 ads$dualstack-logs.amap.com
 adsduiwai.baidu.com
 ads dup.baidustatic.com
@@ -316,8 +313,7 @@ go2.global$google-analytics-cn.com
 adshm.baidu.com
 adshmma.baidu.com
 adshq-tracking.qq.com
-ads)htrace.wetvinfo.com
-!cn
+ads htrace.wetvinfo.com
 adshubcloud.com.cn!hwads-t.api.my7v.com
 adsi-mobile.co.jp
 adsi.snssdk.com
@@ -334,7 +330,8 @@ go2.global$google-analytics-cn.com
 adsimglnkc.comimglnkd.comimgstat.baidu.com
 adsimp.go.sohu.com
 adsimpact-ad.jp
-adsinner-active.mobiinnovid.cominte.sogou.com
+adsinner-active.mobiinnovid.com'insights-collector.gog.com
+adsinte.sogou.com
 adsinte.sogoucdn.com
 adsipinyou.comipinyou.com.cnironbeast.ioisdspeed.qq.com
 adsiwanad.baidu.com
@@ -579,7 +576,8 @@ wit.qq.com
 adsyektanet.com
 yfanads.cnyfanads.com yk-ssp.ad.youku.com
 ads ykad-data.youku.com
-adsylog.hiido.comysm.yahoo.com
+adsylog.hiido.comyoudaoads.com
+adsysm.yahoo.com
 adsz.gds.cnzz.com
 ads*zhihu-web-analytics.zhihu.com
 adszhugeapi.comzhugeapi.netzhugeio.comzxid-api.mobileservice.cnzxid-m.mobileservice.cnzz.bdstatic.com
