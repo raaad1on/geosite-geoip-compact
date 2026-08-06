@@ -29,7 +29,6 @@ ad.qun.qq.com
 ad.sina.com.cn
 ad.tencentmusic.com
 ad.toutiao.com
-ad.unimhk.com
 ad.us.sinaimg.cn
 ad.wang502.com
 ad.weixin.qq.com
@@ -54,7 +53,6 @@ adbkwai.com
 adbox.sina.com.cn
 adbutter.net
 adc.hpplay.cn
-addthisedge.com
 adeng.hpplay.cn
 adfilter.imtt.qq.com
 adfox.ru
@@ -73,7 +71,6 @@ adnet.qq.com
 adnet.sohu.com
 adping.qq.com
 adpm.app.qq.com
-adq.chinaso.com
 ads-api.duolingo.com
 ads-pixiv.net
 ads-twitter.com
@@ -223,9 +220,7 @@ c.uaa.iqiyi.com
 cb.baidu.com
 cbjs.baidu.com
 ccs.umeng.com
-cdn.advertserve.com
 cdn.banclip.com
-cdn.pocoiq.cn
 cdp.cloud.unity3d.com
 cfts1tifqr.com
 china-caa.org
@@ -263,7 +258,6 @@ cupid.iqiyi.com
 cxhub.ru
 da.hunantv.com
 da.mgtv.com
-das-rpt-log.ucloud.cn
 data.flurry.com
 data.mistat.india.xiaomi.com
 data.mistat.intl.xiaomi.com
@@ -271,8 +265,8 @@ data.mistat.rus.xiaomi.com
 data.mistat.xiaomi.com
 dc.letv.com
 decide.mixpanel.com
+demdex.net
 dig.bdurl.net
-dn-growing.qbox.me
 doubleclick-cn.net
 doubleclick.cn
 doubleclick.com
@@ -482,7 +476,6 @@ nsclick.baidu.com
 nsclickvideo.baidu.com
 obs.mts.ru
 oc.umeng.com
-oct.pocoiq.cn
 onesignal.com
 optaim.com
 optimus-ads.amap.com
@@ -577,7 +570,6 @@ spcode.baidu.com
 splash-ads.cdn.unity.cn
 splash-ads.unitychina.cn
 ssp.api.tappx.com
-stat.chinaso.com
 stat.m.jd.com
 stat.y.qq.com
 stat.youku.com
@@ -785,16 +777,6 @@ full:openai.qualtrics.com
 full:p3-ad-sign.byteimg.com
 full:p6-ad-sign.byteimg.com
 full:p9-ad-sign.byteimg.com
-full:pinggai0.caixin.com
-full:pinggai1.caixin.com
-full:pinggai2.caixin.com
-full:pinggai3.caixin.com
-full:pinggai4.caixin.com
-full:pinggai5.caixin.com
-full:pinggai6.caixin.com
-full:pinggai7.caixin.com
-full:pinggai8.caixin.com
-full:pinggai9.caixin.com
 full:pixel.rustore.ru
 full:pixel.yandex.com
 full:prodvizhenie-adv.ozon.ru
