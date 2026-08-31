@@ -1,5 +1,5 @@
 
-ËÇ
+ÑÍ
 CATEGORY-ADS2mdn-cn.net
 ads2mdn.net
 ads	51.la51y5.neta.adtng.coma.alimama.cn
@@ -154,6 +154,12 @@ adv.vk.com
 adsanalytics.umetrip.comanalytics.vk.com
 ads'analytics.vpc.duolingo.com
 ads%api-adservices.apple.com
+ads%api-secure.amplitude.com
+ads(api-secure.eu.amplitude.com
+ads!api-sr.amplitude.com
+ads$api-sr.eu.amplitude.com
+adsapi.amplitude.com
+ads!api.eu.amplitude.com
 adsapi2.amplitude.com
 ads!app-ads-services.com
 ads+app-analytics-services-att.com
@@ -170,6 +176,8 @@ applvn.com"appmetrica.yandex.com
 adsar.umeng.com
 adsark.letv.com
 ads#aspect-upush.umeng.com
+ads(assistant-api.amplitude.com
+ads+assistant-api.eu.amplitude.com
 adsassp.sohu.com
 adsatanx.alicdn.com
 adsatanx2.alicdn.com
@@ -201,7 +209,9 @@ applvn.com"appmetrica.yandex.com
 adscb.baidu.com
 adscbjs.baidu.com
 adsccs.umeng.com
-adscdn.banclip.com"cdp.cloud.unity3d.com
+adscdn.amplitude.com
+adscdn.banclip.com!cdn.eu.amplitude.com
+ads"cdp.cloud.unity3d.com
 adscfts1tifqr.comchina-caa.orgchinaciaf.org
 clarity.ms
 adsclck.yandex.ru
@@ -261,6 +271,8 @@ demdex.net
 adseduad.baidu.com
 adseiv.baidu.com
 ads	emogi.comems.youku.com
+ads,engagement-static.amplitude.com
+ads/"engagement-static.eu.amplitude.com
 adsero-advertising.comeroadvertising.com$euads-o.api.leiniao.com
 adsevt.mxplay.comexoclick.com
 exosrv.comextlog.snssdk.com
@@ -309,6 +321,8 @@ go2.global$google-analytics-cn.com
 ads graph.instagram.com
 adsgraph.whatsapp.com
 adsgraph.whatsapp.net
+adsgs.amplitude.com
+ads gs.eu.amplitude.com
 ads!guanggaoad.youku.com
 adsgz-data.com	gzads.comh-adashx.ut.ele.me
 ads#h-adashx.ut.taobao.com
@@ -347,7 +361,9 @@ go2.global$google-analytics-cn.com
 adsjads.cojl3.yjaxa.topjs-agent.newrelic.comjuicyads.com
 jzt.jd.com
 adskaprila.comkepler-37b.comkurogames-ads.com
-ads	kuyun.com	ladsp.com
+ads	kuyun.comlab.amplitude.com
+ads!lab.eu.amplitude.com
+ads	ladsp.com
 adsleanplum.comlianmeng.360.cn
 ads(log-upload-os.hoyoverse.com
 ads"log-upload.mihoyo.com
@@ -471,7 +487,9 @@ optaim.com!optimus-ads.amap.com
 ads	qwapi.com
 ads	r.mail.ru
 adsradar.imgsmail.ru
-adsreachmax.cnrealsrv.comreke.at.sohu.com
+adsreachmax.cnrealsrv.com'regionconfig.amplitude.com
+ads*regionconfig.eu.amplitude.com
+adsreke.at.sohu.com
 adsrelap.mail.ru
 ads report.qqweb.qq.com
 ads$report.tencentmusic.com
@@ -508,6 +526,8 @@ shuzilm.cnslog.sina.cn
 adsspcode.baidu.com
 ads$splash-ads.cdn.unity.cn
 ads%splash-ads.unitychina.cn
+ads(sr-client-cfg.amplitude.com
+ads+sr-client-cfg.eu.amplitude.com
 adsssp.api.tappx.comstat.m.jd.com
 adsstat.y.qq.com
 adsstat.youku.com

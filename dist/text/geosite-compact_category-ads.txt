@@ -168,6 +168,12 @@ analytics.umetrip.com
 analytics.vk.com
 analytics.vpc.duolingo.com
 api-adservices.apple.com
+api-secure.amplitude.com
+api-secure.eu.amplitude.com
+api-sr.amplitude.com
+api-sr.eu.amplitude.com
+api.amplitude.com
+api.eu.amplitude.com
 api2.amplitude.com
 app-ads-services.com
 app-analytics-services-att.com
@@ -186,6 +192,8 @@ apptracer.ru
 ar.umeng.com
 ark.letv.com
 aspect-upush.umeng.com
+assistant-api.amplitude.com
+assistant-api.eu.amplitude.com
 assp.sohu.com
 atanx.alicdn.com
 atanx2.alicdn.com
@@ -220,7 +228,9 @@ c.uaa.iqiyi.com
 cb.baidu.com
 cbjs.baidu.com
 ccs.umeng.com
+cdn.amplitude.com
 cdn.banclip.com
+cdn.eu.amplitude.com
 cdp.cloud.unity3d.com
 cfts1tifqr.com
 china-caa.org
@@ -289,6 +299,8 @@ eduad.baidu.com
 eiv.baidu.com
 emogi.com
 ems.youku.com
+engagement-static.amplitude.com
+engagement-static.eu.amplitude.com
 ero-advertising.com
 eroadvertising.com
 euads-o.api.leiniao.com
@@ -341,6 +353,8 @@ graph-fallback.instagram.com
 graph.instagram.com
 graph.whatsapp.com
 graph.whatsapp.net
+gs.amplitude.com
+gs.eu.amplitude.com
 guanggaoad.youku.com
 gz-data.com
 gzads.com
@@ -397,6 +411,8 @@ kaprila.com
 kepler-37b.com
 kurogames-ads.com
 kuyun.com
+lab.amplitude.com
+lab.eu.amplitude.com
 ladsp.com
 leanplum.com
 lianmeng.360.cn
@@ -528,6 +544,8 @@ r.mail.ru
 radar.imgsmail.ru
 reachmax.cn
 realsrv.com
+regionconfig.amplitude.com
+regionconfig.eu.amplitude.com
 reke.at.sohu.com
 relap.mail.ru
 report.qqweb.qq.com
@@ -569,6 +587,8 @@ socdm.com
 spcode.baidu.com
 splash-ads.cdn.unity.cn
 splash-ads.unitychina.cn
+sr-client-cfg.amplitude.com
+sr-client-cfg.eu.amplitude.com
 ssp.api.tappx.com
 stat.m.jd.com
 stat.y.qq.com
