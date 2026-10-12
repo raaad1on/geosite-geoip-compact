@@ -1,15 +1,16 @@
-name: Build compact geosite and geoip
+name: Build compact geosite / geoip / srs
 
 on:
   push:
     branches:
       - main
       - master
+    # Коммит dist ботом с [skip ci] не должен зацикливать workflow
     paths-ignore:
       - 'dist/**'
   workflow_dispatch:
   schedule:
-    # Ежедневно 03:00 UTC
+    # Ежедневно 03:00 UTC — свежие .dat + .srs в релизе latest
     - cron: '0 3 * * *'
 
 permissions:
@@ -22,6 +23,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # Нужен для force-move тега latest и push после коммита dist
+          fetch-depth: 0
 
       - name: Set up Go
         uses: actions/setup-go@v5
@@ -43,6 +47,16 @@ jobs:
         run: |
           go install github.com/snowie2000/geoview@latest
           go install github.com/urlesistiana/v2dat@latest
+
+      # sing-box CLI: compile JSON→.srs, decompile, match, check (как у SagerNet/sing-geosite по смыслу)
+      - name: Install sing-box
+        env:
+          SING_BOX_VERSION: '1.11.15'
+        run: |
+          curl -fsSL "https://github.com/SagerNet/sing-box/releases/download/v${SING_BOX_VERSION}/sing-box-${SING_BOX_VERSION}-linux-amd64.tar.gz" \
+            | tar -xz
+          sudo install -m 755 "sing-box-${SING_BOX_VERSION}-linux-amd64/sing-box" /usr/local/bin/sing-box
+          sing-box version
 
       - name: Clone domain-list-community
         run: |
@@ -133,6 +147,14 @@ jobs:
           mkdir -p dist/text
           v2dat unpack geoip -o dist/text -f ru -f private dist/geoip-compact.dat
           v2dat unpack geosite -o dist/text -f private -f category-ru -f category-ads dist/geosite-compact.dat
+          printf '%s\n' \
+            'О текстовом дампе geosite-compact_category-ru.txt' \
+            '-----------------------------------------------' \
+            'В списке намеренно нет многих отдельных *.ru (nalog.ru, gosuslugi.ru и т.д.),' \
+            'если уже есть правило зоны "ru" (tld-ru): domain-list-community удаляет' \
+            'избыточные поддомены (polishList). В Xray geosite:category-ru матчит' \
+            'эти хосты через правило на зону .ru. См. README репозитория.' \
+            > dist/text/README-category-ru.txt
 
       - name: Sanity check category-ru is not empty
         run: |
@@ -141,7 +163,31 @@ jobs:
             exit 1
           fi
 
+      # geoview → JSON (version 1) → sing-box rule-set compile → .srs
+      # + match nalog.ru/gosuslugi.ru + sing-box check с local binary rule_set
+      - name: Build and validate sing-box SRS rule-sets
+        run: |
+          chmod +x scripts/build_and_validate_srs.sh
+          ./scripts/build_and_validate_srs.sh
+
+      - name: Assert release artifacts exist
+        run: |
+          set -e
+          for f in \
+            dist/geoip-compact.dat \
+            dist/geosite-compact.dat \
+            dist/srs/geoip-ru.srs \
+            dist/srs/geoip-private.srs \
+            dist/srs/geosite-category-ru.srs \
+            dist/srs/geosite-private.srs \
+            dist/srs/geosite-category-ads.srs
+          do
+            test -s "$f" || { echo "missing or empty: $f"; exit 1; }
+            echo "OK $(wc -c < "$f") bytes  $f"
+          done
+
       # GITHUB_ENV нельзя использовать в if: следующего шага — только job outputs / step outputs.
+      # dist/ включает .dat, text/*.txt и srs/*.srs — всё уходит в один коммит и в релиз latest.
       - name: Commit dist if changed
         id: commit_dist
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
@@ -150,7 +196,8 @@ jobs:
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add dist
-            git commit -m "Update compact geosite/geoip [skip ci]"
+            git commit -m "Update compact geosite/geoip/srs [skip ci]"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
             git push
             echo "dist_committed=true" >> $GITHUB_OUTPUT
           else
@@ -158,7 +205,7 @@ jobs:
             echo "dist_committed=false" >> $GITHUB_OUTPUT
           fi
 
-      # Тег latest должен указывать на коммит этой сборки (в т.ч. после коммита dist), иначе в UI релиз «старый».
+      # Тег latest → HEAD этой сборки; ассеты (включая .srs) перезаписываются на каждом release.
       - name: Prepare GitHub Release (notes + tag latest → HEAD)
         id: release_prep
         if: |
@@ -170,6 +217,8 @@ jobs:
         run: |
           set -e
           HEAD_SHA="$(git rev-parse HEAD)"
+          REPO="${{ github.repository }}"
+          BASE="https://github.com/${REPO}/releases/download/latest"
           {
             echo "**Сборка (UTC):** $(date -u +'%Y-%m-%d %H:%M:%S')"
             echo "**Коммит:** \`${HEAD_SHA}\`"
@@ -177,13 +226,22 @@ jobs:
             echo "**Workflow:** [#${{ github.run_number }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
             echo ""
             echo "### Состав"
-            echo "- \`geoip-compact.dat\`, \`geosite-compact.dat\` — для Xray (geoip: ru/private; geosite: private, category-ru, category-ads)."
-            echo "- \`category-ru\` = v2fly исходник с include + доп. строки RunetFreedom (см. \`append_runet_extras_to_category_ru.py\`)."
-            echo "- \`*.txt\` — распакованные списки (v2dat unpack)."
+            echo "- \`geoip-compact.dat\`, \`geosite-compact.dat\` — Xray"
+            echo "- \`geoip-ru.srs\`, \`geosite-category-ru.srs\` (+ private, category-ads) — sing-box rule-set"
+            echo "- \`*.txt\` — распакованные списки (v2dat)"
+            echo ""
+            echo "### Стабильные ссылки (всегда свежий \`latest\`)"
+            echo "- [geoip-compact.dat](${BASE}/geoip-compact.dat)"
+            echo "- [geosite-compact.dat](${BASE}/geosite-compact.dat)"
+            echo "- [geoip-ru.srs](${BASE}/geoip-ru.srs)"
+            echo "- [geoip-private.srs](${BASE}/geoip-private.srs)"
+            echo "- [geosite-category-ru.srs](${BASE}/geosite-category-ru.srs)"
+            echo "- [geosite-private.srs](${BASE}/geosite-private.srs)"
+            echo "- [geosite-category-ads.srs](${BASE}/geosite-category-ads.srs)"
           } > release_notes.md
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git tag -fa latest "${HEAD_SHA}" -m "Latest compact geo build"
+          git tag -fa latest "${HEAD_SHA}" -m "Latest compact geo + srs build"
           git push -f origin refs/tags/latest
 
       - name: Create or update GitHub Release
@@ -200,7 +258,13 @@ jobs:
           make_latest: true
           body_path: release_notes.md
           overwrite_files: true
+          fail_on_unmatched_files: true
           files: |
             dist/geoip-compact.dat
             dist/geosite-compact.dat
+            dist/srs/geoip-ru.srs
+            dist/srs/geoip-private.srs
+            dist/srs/geosite-category-ru.srs
+            dist/srs/geosite-private.srs
+            dist/srs/geosite-category-ads.srs
             dist/text/*.txt
