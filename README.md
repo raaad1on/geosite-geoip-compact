@@ -51,11 +51,13 @@
 
 ### `dist/` и релиз `latest`
 
-Каждый успешный прогон на `main` (push / schedule / workflow_dispatch):
+Каждый успешный прогон на `main` (push / schedule ежедневно 03:00 UTC / workflow_dispatch):
 
 1. Пересобирает `.dat` + `.srs` + `.txt`
-2. Коммитит `dist/` при изменениях (`[skip ci]`)
-3. Двигает тег **`latest`** на HEAD и **перезаписывает** ассеты релиза
+2. Считает **краткий дифф** списков vs предыдущий коммит (`scripts/generate_dist_changelog.py`) и пишет в notes + `dist/CHANGELOG.md`
+3. Коммитит `dist/` при изменениях (`[skip ci]`)
+4. Всегда обновляет релиз **`latest`** (тег → HEAD, ассеты overwrite)
+5. Если базы реально изменились — дополнительно создаёт dated-релиз `YYYY.MM.DD` (история в Releases)
 
 Стабильные URL (всегда актуальные файлы):
 

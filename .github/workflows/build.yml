@@ -186,8 +186,22 @@ jobs:
             echo "OK $(wc -c < "$f") bytes  $f"
           done
 
+      # Дифф текстовых списков/хешей vs предыдущий коммит → notes + dist/CHANGELOG.md
+      - name: Generate database changelog
+        id: changelog
+        run: |
+          set -e
+          python3 scripts/generate_dist_changelog.py \
+            --history-only-if-changed \
+            --out work/changelog_section.md
+          if grep -qx '1' work/dist_materially_changed; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
       # GITHUB_ENV нельзя использовать в if: следующего шага — только job outputs / step outputs.
-      # dist/ включает .dat, text/*.txt и srs/*.srs — всё уходит в один коммит и в релиз latest.
+      # dist/ включает .dat, text/*.txt, srs/*.srs и CHANGELOG.md
       - name: Commit dist if changed
         id: commit_dist
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
@@ -205,7 +219,7 @@ jobs:
             echo "dist_committed=false" >> $GITHUB_OUTPUT
           fi
 
-      # Тег latest → HEAD этой сборки; ассеты (включая .srs) перезаписываются на каждом release.
+      # Всегда обновляем latest на schedule/dispatch/push/main (ассеты + notes с диффом).
       - name: Prepare GitHub Release (notes + tag latest → HEAD)
         id: release_prep
         if: |
@@ -219,6 +233,11 @@ jobs:
           HEAD_SHA="$(git rev-parse HEAD)"
           REPO="${{ github.repository }}"
           BASE="https://github.com/${REPO}/releases/download/latest"
+          DAY_TAG="$(date -u +'%Y.%m.%d')"
+          if git rev-parse -q --verify "refs/tags/${DAY_TAG}" >/dev/null; then
+            DAY_TAG="${DAY_TAG}-r${{ github.run_number }}"
+          fi
+          echo "day_tag=${DAY_TAG}" >> $GITHUB_OUTPUT
           {
             echo "**Сборка (UTC):** $(date -u +'%Y-%m-%d %H:%M:%S')"
             echo "**Коммит:** \`${HEAD_SHA}\`"
@@ -227,10 +246,13 @@ jobs:
             echo ""
             echo "### Состав"
             echo "- \`geoip-compact.dat\`, \`geosite-compact.dat\` — Xray"
-            echo "- \`geoip-ru.srs\`, \`geosite-category-ru.srs\` (+ private, category-ads) — sing-box rule-set"
+            echo "- \`geoip-ru.srs\`, \`geosite-category-ru.srs\` (+ private, category-ads) — sing-box"
+            echo "- \`CHANGELOG.md\` — накопленная краткая история диффов"
             echo "- \`*.txt\` — распакованные списки (v2dat)"
             echo ""
-            echo "### Стабильные ссылки (всегда свежий \`latest\`)"
+            cat work/changelog_section.md
+            echo ""
+            echo "### Стабильные ссылки (\`latest\` — всегда перезаписывается)"
             echo "- [geoip-compact.dat](${BASE}/geoip-compact.dat)"
             echo "- [geosite-compact.dat](${BASE}/geosite-compact.dat)"
             echo "- [geoip-ru.srs](${BASE}/geoip-ru.srs)"
@@ -238,13 +260,14 @@ jobs:
             echo "- [geosite-category-ru.srs](${BASE}/geosite-category-ru.srs)"
             echo "- [geosite-private.srs](${BASE}/geosite-private.srs)"
             echo "- [geosite-category-ads.srs](${BASE}/geosite-category-ads.srs)"
+            echo "- [CHANGELOG.md](${BASE}/CHANGELOG.md)"
           } > release_notes.md
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git tag -fa latest "${HEAD_SHA}" -m "Latest compact geo + srs build"
           git push -f origin refs/tags/latest
 
-      - name: Create or update GitHub Release
+      - name: Create or update GitHub Release (latest)
         if: |
           (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') &&
           (steps.commit_dist.outputs.dist_committed == 'true' ||
@@ -268,3 +291,30 @@ jobs:
             dist/srs/geosite-private.srs
             dist/srs/geosite-category-ads.srs
             dist/text/*.txt
+            dist/CHANGELOG.md
+
+      # Снимок в истории GitHub Releases, только если базы реально изменились
+      - name: Create dated historical release
+        if: |
+          (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') &&
+          steps.changelog.outputs.changed == 'true' &&
+          (steps.commit_dist.outputs.dist_committed == 'true' ||
+           github.event_name == 'schedule' ||
+           github.event_name == 'workflow_dispatch' ||
+           github.event_name == 'push')
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.release_prep.outputs.day_tag }}
+          name: ${{ steps.release_prep.outputs.day_tag }}
+          make_latest: false
+          body_path: release_notes.md
+          files: |
+            dist/geoip-compact.dat
+            dist/geosite-compact.dat
+            dist/srs/geoip-ru.srs
+            dist/srs/geoip-private.srs
+            dist/srs/geosite-category-ru.srs
+            dist/srs/geosite-private.srs
+            dist/srs/geosite-category-ads.srs
+            dist/text/*.txt
+            dist/CHANGELOG.md
