@@ -581,6 +581,7 @@ sberauto.com
 sberbank-tele.com
 sberbank.com
 sbercloud.tech
+sbermarketing.ru
 seclab.lat
 selcdn.net
 selectel.academy
@@ -982,6 +983,7 @@ full:dnl-17.geo.kaspersky.com
 full:dnl-18.geo.kaspersky.com
 full:dnl-19.geo.kaspersky.com
 full:edge.geo.kaspersky.com
+full:error-tracking.megamarket.tech
 full:google-analytics-suite.ozon.ru
 full:informer.yandex.ru
 full:ksn-cinfo-geo.kaspersky-labs.com
@@ -1016,6 +1018,7 @@ full:mc.yandex.com
 full:mc.yandex.net
 full:mc.yango.com
 full:mdr.ksn.kaspersky-labs.com
+full:metrics.21-school.ru
 full:metrika.kontur.ru
 full:mvideo.edna.io
 full:new-adv.ozon.ru
@@ -1079,6 +1082,7 @@ full:sentry.mindbox.ru
 full:sentry.ozon.ru
 full:sentry.popmechanic.ru
 full:sentry.rustore.ru
+full:sentry.sberauto.com
 full:sentry.viqeo.tv
 full:sentry.wb.ru
 full:sentry.x5.ru
@@ -1093,6 +1097,7 @@ full:stats.vk-portal.net
 full:t.mail.ru
 full:target.vk.com
 full:top-staging.mail.ru
+full:tracing-http.megamarket.tech
 full:visor.sberbank.ru
 full:web-analytics.wildberries.ru
 full:whiteline.mail.ru

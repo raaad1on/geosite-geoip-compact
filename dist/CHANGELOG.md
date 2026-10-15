@@ -1,5 +1,31 @@
 # История изменений compact geo
 
+## 2026-10-15 08:09 UTC
+
+### Изменения в базах
+
+| Список | Было | Стало | + | − |
+| --- | ---: | ---: | ---: | ---: |
+| geosite category-ru | 1106 | 1111 | 5 | 0 |
+| geosite category-ads | 843 | 843 | 0 | 0 |
+| geosite private | 131 | 131 | 0 | 0 |
+| geoip ru | 25171 | 25171 | 0 | 0 |
+| geoip private | 18 | 18 | 0 | 0 |
+
+| Файл | sha256 (было) | sha256 (стало) |
+| --- | --- | --- |
+| `geoip-compact.dat` | `c502673e69d1` | `c502673e69d1` |
+| `geosite-compact.dat` | `86cd7ae2e8e0` | `87c93346740d` |
+| `geoip-ru.srs` | `1330cd63c4da` | `1330cd63c4da` |
+| `geosite-category-ru.srs` | `3ea824e1c8a5` | `90d5d23dd816` |
+
+<details><summary>Примеры +/− (кратко)</summary>
+
+**geosite category-ru**
+- добавлено: `full:error-tracking.megamarket.tech`, `full:metrics.21-school.ru`, `full:sentry.sberauto.com`, `full:tracing-http.megamarket.tech`, `sbermarketing.ru`
+
+</details>
+
 ## 2026-10-13 10:22 UTC
 
 ### Изменения в базах

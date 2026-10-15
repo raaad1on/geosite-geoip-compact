@@ -771,7 +771,7 @@ rs.mail.ru
 adsxray.mail.ru
 adsOB^speed\.(coe|open)\.ad\.[a-z]{2,6}\.prod\.hosts\.ooklaserver\.net$
 ads
-é»
+®½
 CATEGORY-RU1917live.red
 24h.tv2gis.ae2gis.am2gis.az2gis.by2gis.com2gis.com.cy2gis.cz2gis.ge2gis.kg2gis.kz	2gis.tech2gis.tj2gis.uz	3ebra.net4epenaxa.com5post.marketa.mts.ru
 adsaccesspoint.uz
@@ -880,8 +880,9 @@ mts-ws.netmvk.commy-manager-account.com
 adsmycdn.memyoffice.team
 mytopf.com
 mytrk.link
-naydex.net
-neon.clicknetcraze.clubnetcraze.linknetcraze.pronetmonet.conetschool.website
+naydex.net
+neon.click
+adsnetcraze.clubnetcraze.linknetcraze.pronetmonet.conetschool.website
 ngenix.netnoticias-rt.comnotimundo.press
 obs.mts.ru
 adsodnoklasniki.byodnoklasniki.uaodnoklassniki.amodnoklassniki.byodnoklassniki.co.eeodnoklassniki.euodnoklassniki.lvodnoklassniki.tjognihome.com	ok.me
@@ -907,7 +908,8 @@ ru.ccb.com
 ru.netrugpt.ioruhub.tvrunewsrt.comruptly.agency	ruptly.tvruptly.videorurtnews.comrussiabeyond.comrussiaislove.comrussiatoday.comrussiatoday.netrussiatoday.tvrussieactuelle.frrustore.team
 rustore.tvrutube.sportrwbautomation.techs.mindbox.ru
 adssaas-support.comsafeliner.techsage-observability.tech
-sayeasy.eusber-bank.bysber.prosberauto.comsberbank-tele.comsberbank.comsbercloud.tech
+sayeasy.eusber-bank.bysber.prosberauto.comsberbank-tele.comsberbank.comsbercloud.techsbermarketing.ru
+ads
 seclab.lat
 selcdn.netselectel.academyselectel.blogselectel.comselectel.devselectel.infoselectel.ioselectel.liveservercore.comservercore.liveservicepipe.techsfunpay.comshedevrum.aishedevrum.comshop-rt.com
 showip.netsistema-capital.comskbx.proskillbox.prosky.proslavicstar.com
@@ -1057,7 +1059,8 @@ bs.mail.ru
 cn$dnl-18.geo.kaspersky.com
 cn$dnl-19.geo.kaspersky.com
 cn"edge.geo.kaspersky.com
-cn+google-analytics-suite.ozon.ru
+cn+error-tracking.megamarket.tech
+ads+google-analytics-suite.ozon.ru
 adsinformer.yandex.ru
 ads, ksn-cinfo-geo.kaspersky-labs.com
 cn*ksn-cinfo.geoksn.kaspersky.com
@@ -1091,7 +1094,8 @@ bs.mail.ru
 adsmc.yandex.net
 adsmc.yango.com
 ads&mdr.ksn.kaspersky-labs.com
-cnmetrika.kontur.ru
+cn!metrics.21-school.ru
+adsmetrika.kontur.ru
 adsmvideo.edna.ionew-adv.ozon.ru
 ads!p00.upd.kaspersky.com
 cn!p01.upd.kaspersky.com
@@ -1156,6 +1160,7 @@ rs.mail.ru
 adssentry.ozon.ru
 ads"sentry.popmechanic.ru
 adssentry.rustore.ru
+ads sentry.sberauto.com
 adssentry.viqeo.tv
 adssentry.wb.ru
 adssentry.x5.ru
@@ -1170,6 +1175,7 @@ rs.mail.ru
 ads	t.mail.ru
 adstarget.vk.com
 ads top-staging.mail.ru
+ads)tracing-http.megamarket.tech
 adsvisor.sberbank.ru
 ads)web-analytics.wildberries.ru
 adswhiteline.mail.ru
