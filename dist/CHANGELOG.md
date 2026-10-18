@@ -1,5 +1,33 @@
 # История изменений compact geo
 
+## 2026-10-18 07:55 UTC
+
+### Изменения в базах
+
+| Список | Было | Стало | + | − |
+| --- | ---: | ---: | ---: | ---: |
+| geosite category-ru | 1111 | 1121 | 10 | 0 |
+| geosite category-ads | 843 | 843 | 0 | 0 |
+| geosite private | 131 | 133 | 2 | 0 |
+| geoip ru | 25194 | 25194 | 0 | 0 |
+| geoip private | 18 | 18 | 0 | 0 |
+
+| Файл | sha256 (было) | sha256 (стало) |
+| --- | --- | --- |
+| `geoip-compact.dat` | `740d8143418d` | `759989f407ee` |
+| `geosite-compact.dat` | `87c93346740d` | `7648c3242851` |
+| `geoip-ru.srs` | `d34c090a078b` | `d34c090a078b` |
+| `geosite-category-ru.srs` | `90d5d23dd816` | `f9c9be3a9e78` |
+
+<details><summary>Примеры +/− (кратко)</summary>
+
+**geosite category-ru**
+- добавлено: `beget.app`, `beget.cloud`, `beget.de`, `beget.hosting`, `beget.pro`, `beget.tech`, `begetcdn.cloud`, `sprut.io`, `timeweb.tech`, `timewebcloud.kz`
+**geosite private**
+- добавлено: `full:localhost.weixin.qq.com`, `full:localhost.work.weixin.qq.com`
+
+</details>
+
 ## 2026-10-17 07:40 UTC
 
 ### Изменения в базах
