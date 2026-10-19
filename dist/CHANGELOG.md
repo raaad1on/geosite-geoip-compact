@@ -1,5 +1,31 @@
 # История изменений compact geo
 
+## 2026-10-19 08:41 UTC
+
+### Изменения в базах
+
+| Список | Было | Стало | + | − |
+| --- | ---: | ---: | ---: | ---: |
+| geosite category-ru | 1121 | 1137 | 16 | 0 |
+| geosite category-ads | 843 | 843 | 0 | 0 |
+| geosite private | 133 | 133 | 0 | 0 |
+| geoip ru | 25194 | 25194 | 0 | 0 |
+| geoip private | 18 | 18 | 0 | 0 |
+
+| Файл | sha256 (было) | sha256 (стало) |
+| --- | --- | --- |
+| `geoip-compact.dat` | `759989f407ee` | `759989f407ee` |
+| `geosite-compact.dat` | `7648c3242851` | `e1bbeb49608f` |
+| `geoip-ru.srs` | `d34c090a078b` | `d34c090a078b` |
+| `geosite-category-ru.srs` | `f9c9be3a9e78` | `feba5d21993b` |
+
+<details><summary>Примеры +/− (кратко)</summary>
+
+**geosite category-ru**
+- добавлено: `amt-insurance.com`, `bitrix24.com`, `bitrix24.net`, `bitrix24.tech`, `bitrix24public.com`, `bitrixphone.com`, `bitrixsoft.com`, `chat2desk.com`, `full:kp-config-smart-tv.akamaized.net`, `full:kp-configs-smart-tv.s3.eu-central-1.amazonaws.com`, `joyreactor.cc`, `ktalk.host` … (+4)
+
+</details>
+
 ## 2026-10-18 07:55 UTC
 
 ### Изменения в базах

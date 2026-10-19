@@ -40,6 +40,7 @@ alfa.me
 alfabank.st
 algoritmika.org
 alt-ad.mail.ru
+amt-insurance.com
 an.yandex.ru
 analytics.vk.com
 antiphishing.nl
@@ -78,6 +79,12 @@ beget.tech
 begetcdn.cloud
 best2pay.net
 bitrix.info
+bitrix24.com
+bitrix24.net
+bitrix24.tech
+bitrix24public.com
+bitrixphone.com
+bitrixsoft.com
 bizmrg.com
 bk6bba-resources.com
 book1917.live
@@ -97,6 +104,7 @@ cdek.shopping
 cdn-vk.net
 cdnvideohub.com
 cert-gib.com
+chat2desk.com
 chipcore.com
 chizhik.club
 cian.site
@@ -313,6 +321,7 @@ jivochat.de
 jivochat.es
 jivochat.ng
 jivosite.com
+joyreactor.cc
 jump.taxi
 justveryok.com
 kaspersky-labs.com
@@ -360,9 +369,11 @@ kontur.host
 korona.com
 koronapay.com
 koshelek.app
+ktalk.host
 ktech.team
 lenta.com
 lenta.tech
+lexgarant.com
 log.dzen.ru
 lovina.app
 magnit.com
@@ -477,6 +488,7 @@ pobeda.page
 polza.ai
 popmechanic.io
 poudobnee.com
+pravmir.com
 premier.one
 premiumlive.site
 priovtb.com
@@ -501,8 +513,10 @@ reaviz.com
 reg.cloud
 reg.com
 relap.mail.ru
+renins.com
 reso-med.com
 restream-media.net
+robohall.tech
 robotext.io
 rocketozon.by
 roistat.com
@@ -996,6 +1010,8 @@ full:edge.geo.kaspersky.com
 full:error-tracking.megamarket.tech
 full:google-analytics-suite.ozon.ru
 full:informer.yandex.ru
+full:kp-config-smart-tv.akamaized.net
+full:kp-configs-smart-tv.s3.eu-central-1.amazonaws.com
 full:ksn-cinfo-geo.kaspersky-labs.com
 full:ksn-cinfo.geoksn.kaspersky.com
 full:ksn-crypto-info-geo.kaspersky-labs.com
