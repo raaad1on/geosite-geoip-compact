@@ -1,5 +1,31 @@
 # История изменений compact geo
 
+## 2026-10-20 08:22 UTC
+
+### Изменения в базах
+
+| Список | Было | Стало | + | − |
+| --- | ---: | ---: | ---: | ---: |
+| geosite category-ru | 1137 | 1141 | 4 | 0 |
+| geosite category-ads | 843 | 843 | 0 | 0 |
+| geosite private | 133 | 133 | 0 | 0 |
+| geoip ru | 25194 | 25194 | 0 | 0 |
+| geoip private | 18 | 18 | 0 | 0 |
+
+| Файл | sha256 (было) | sha256 (стало) |
+| --- | --- | --- |
+| `geoip-compact.dat` | `759989f407ee` | `759989f407ee` |
+| `geosite-compact.dat` | `e1bbeb49608f` | `79ee7f607156` |
+| `geoip-ru.srs` | `d34c090a078b` | `d34c090a078b` |
+| `geosite-category-ru.srs` | `feba5d21993b` | `34d032c9ca11` |
+
+<details><summary>Примеры +/− (кратко)</summary>
+
+**geosite category-ru**
+- добавлено: `hellodoc.app`, `medrocket.me`, `terratraf.com`, `terratraf.io`
+
+</details>
+
 ## 2026-10-19 08:41 UTC
 
 ### Изменения в базах
