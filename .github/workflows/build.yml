@@ -163,6 +163,13 @@ jobs:
             exit 1
           fi
 
+      # Те же списки, что в .txt, в виде JSON-массива строк
+      - name: Export domain/CIDR lists as JSON arrays
+        run: |
+          python3 scripts/export_lists_json.py --dir dist/text
+          test -s dist/text/geosite-compact_category-ru.json
+          python3 -c "import json; d=json.load(open('dist/text/geosite-compact_category-ru.json')); assert isinstance(d,list) and len(d)>0; print('category-ru json:', len(d))"
+
       # geoview → JSON (version 1) → sing-box rule-set compile → .srs
       # + match nalog.ru/gosuslugi.ru + sing-box check с local binary rule_set
       - name: Build and validate sing-box SRS rule-sets
@@ -248,7 +255,7 @@ jobs:
             echo "- \`geoip-compact.dat\`, \`geosite-compact.dat\` — Xray"
             echo "- \`geoip-ru.srs\`, \`geosite-category-ru.srs\` (+ private, category-ads) — sing-box"
             echo "- \`CHANGELOG.md\` — накопленная краткая история диффов"
-            echo "- \`*.txt\` — распакованные списки (v2dat)"
+            echo "- \`*.txt\` / \`*.json\` — распакованные списки (текст и JSON-массив)"
             echo ""
             cat work/changelog_section.md
             echo ""
@@ -291,6 +298,7 @@ jobs:
             dist/srs/geosite-private.srs
             dist/srs/geosite-category-ads.srs
             dist/text/*.txt
+            dist/text/*.json
             dist/CHANGELOG.md
 
       # Снимок в истории GitHub Releases, только если базы реально изменились
@@ -317,4 +325,5 @@ jobs:
             dist/srs/geosite-private.srs
             dist/srs/geosite-category-ads.srs
             dist/text/*.txt
+            dist/text/*.json
             dist/CHANGELOG.md

@@ -71,7 +71,7 @@ https://github.com/raaad1on/geosite-geoip-compact/releases/download/latest/geosi
 https://github.com/raaad1on/geosite-geoip-compact/releases/download/latest/geosite-category-ads.srs
 ```
 
-В репозитории: `dist/geoip-compact.dat`, `dist/geosite-compact.dat`, `dist/srs/*.srs`, `dist/text/*.txt`.
+В репозитории: `dist/geoip-compact.dat`, `dist/geosite-compact.dat`, `dist/srs/*.srs`, `dist/text/*.txt`, `dist/text/*.json` (те же списки доменов/CIDR как JSON-массив).
 
 ### Xray
 
@@ -119,5 +119,6 @@ https://github.com/raaad1on/geosite-geoip-compact/releases/download/latest/geosi
 
 - **`scripts/append_runet_extras_to_category_ru.py`** — основной для CI (Xray geosite).
 - **`scripts/build_and_validate_srs.sh`** — compact `.dat` → `.srs` + проверка sing-box.
+- **`scripts/export_lists_json.py`** — `dist/text/*.txt` → JSON-массивы (`*.json`).
 - **`scripts/flatten_category_ru.py`** — устарело для прод-сборки; только эксперименты.
 - **`scripts/flatten_geosite_includes.py`** — вспомогательно для текстов v2dat.
