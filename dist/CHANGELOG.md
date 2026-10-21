@@ -1,5 +1,33 @@
 # История изменений compact geo
 
+## 2026-10-21 08:26 UTC
+
+### Изменения в базах
+
+| Список | Было | Стало | + | − |
+| --- | ---: | ---: | ---: | ---: |
+| geosite category-ru | 1141 | 1143 | 2 | 0 |
+| geosite category-ads | 843 | 844 | 1 | 0 |
+| geosite private | 133 | 133 | 0 | 0 |
+| geoip ru | 25194 | 25194 | 0 | 0 |
+| geoip private | 18 | 18 | 0 | 0 |
+
+| Файл | sha256 (было) | sha256 (стало) |
+| --- | --- | --- |
+| `geoip-compact.dat` | `759989f407ee` | `740d8143418d` |
+| `geosite-compact.dat` | `79ee7f607156` | `be2eed6c1ae3` |
+| `geoip-ru.srs` | `d34c090a078b` | `d34c090a078b` |
+| `geosite-category-ru.srs` | `34d032c9ca11` | `da5886a728e4` |
+
+<details><summary>Примеры +/− (кратко)</summary>
+
+**geosite category-ru**
+- добавлено: `avito.com`, `avito.tech`
+**geosite category-ads**
+- добавлено: `full:o33249.ingest.us.sentry.io`
+
+</details>
+
 ## 2026-10-20 08:22 UTC
 
 ### Изменения в базах

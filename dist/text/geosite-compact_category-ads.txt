@@ -783,6 +783,7 @@ full:metrics.21-school.ru
 full:metrika.kontur.ru
 full:new-adv.ozon.ru
 full:o33249.ingest.sentry.io
+full:o33249.ingest.us.sentry.io
 full:o4504926511693824.ingest.sentry.io
 full:openai.qualtrics.com
 full:p3-ad-sign.byteimg.com
