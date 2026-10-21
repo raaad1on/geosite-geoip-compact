@@ -267,6 +267,8 @@ jobs:
             echo "- [geosite-category-ru.srs](${BASE}/geosite-category-ru.srs)"
             echo "- [geosite-private.srs](${BASE}/geosite-private.srs)"
             echo "- [geosite-category-ads.srs](${BASE}/geosite-category-ads.srs)"
+            echo "- [geosite-compact_category-ru.json](${BASE}/geosite-compact_category-ru.json)"
+            echo "- [geoip-compact_ru.json](${BASE}/geoip-compact_ru.json)"
             echo "- [CHANGELOG.md](${BASE}/CHANGELOG.md)"
           } > release_notes.md
           git config user.name "github-actions[bot]"
