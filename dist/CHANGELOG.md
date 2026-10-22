@@ -1,5 +1,31 @@
 # История изменений compact geo
 
+## 2026-10-22 08:28 UTC
+
+### Изменения в базах
+
+| Список | Было | Стало | + | − |
+| --- | ---: | ---: | ---: | ---: |
+| geosite category-ru | 1143 | 1146 | 3 | 0 |
+| geosite category-ads | 844 | 844 | 0 | 0 |
+| geosite private | 133 | 133 | 0 | 0 |
+| geoip ru | 25194 | 25194 | 0 | 0 |
+| geoip private | 18 | 18 | 0 | 0 |
+
+| Файл | sha256 (было) | sha256 (стало) |
+| --- | --- | --- |
+| `geoip-compact.dat` | `759989f407ee` | `740d8143418d` |
+| `geosite-compact.dat` | `be2eed6c1ae3` | `77ab3134032c` |
+| `geoip-ru.srs` | `d34c090a078b` | `d34c090a078b` |
+| `geosite-category-ru.srs` | `da5886a728e4` | `136c9b6a26cd` |
+
+<details><summary>Примеры +/− (кратко)</summary>
+
+**geosite category-ru**
+- добавлено: `ds-servers.com`, `dsn.host`, `dsncdn.net`
+
+</details>
+
 ## 2026-10-21 10:54 UTC
 
 ### Изменения в базах
