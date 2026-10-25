@@ -1,5 +1,31 @@
 # История изменений compact geo
 
+## 2026-10-25 08:17 UTC
+
+### Изменения в базах
+
+| Список | Было | Стало | + | − |
+| --- | ---: | ---: | ---: | ---: |
+| geosite category-ru | 1146 | 1146 | 0 | 0 |
+| geosite category-ads | 844 | 845 | 1 | 0 |
+| geosite private | 133 | 133 | 0 | 0 |
+| geoip ru | 25107 | 25107 | 0 | 0 |
+| geoip private | 28 | 28 | 0 | 0 |
+
+| Файл | sha256 (было) | sha256 (стало) |
+| --- | --- | --- |
+| `geoip-compact.dat` | `d912672d613f` | `b85bf6ad1b2d` |
+| `geosite-compact.dat` | `77ab3134032c` | `c419923551d6` |
+| `geoip-ru.srs` | `4c71ec0cb5c6` | `4c71ec0cb5c6` |
+| `geosite-category-ru.srs` | `136c9b6a26cd` | `136c9b6a26cd` |
+
+<details><summary>Примеры +/− (кратко)</summary>
+
+**geosite category-ads**
+- добавлено: `gdtimg.com`
+
+</details>
+
 ## 2026-10-24 08:00 UTC
 
 ### Изменения в базах
