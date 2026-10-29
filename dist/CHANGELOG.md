@@ -1,5 +1,31 @@
 # История изменений compact geo
 
+## 2026-10-29 09:43 UTC
+
+### Изменения в базах
+
+| Список | Было | Стало | + | − |
+| --- | ---: | ---: | ---: | ---: |
+| geosite category-ru | 1146 | 1147 | 1 | 0 |
+| geosite category-ads | 845 | 845 | 0 | 0 |
+| geosite private | 133 | 133 | 0 | 0 |
+| geoip ru | 25107 | 25107 | 0 | 0 |
+| geoip private | 28 | 28 | 0 | 0 |
+
+| Файл | sha256 (было) | sha256 (стало) |
+| --- | --- | --- |
+| `geoip-compact.dat` | `d912672d613f` | `d912672d613f` |
+| `geosite-compact.dat` | `1b0dd12122c3` | `e06256639051` |
+| `geoip-ru.srs` | `4c71ec0cb5c6` | `4c71ec0cb5c6` |
+| `geosite-category-ru.srs` | `136c9b6a26cd` | `83c507c52eb7` |
+
+<details><summary>Примеры +/− (кратко)</summary>
+
+**geosite category-ru**
+- добавлено: `ivi.tv`
+
+</details>
+
 ## 2026-10-28 09:30 UTC
 
 ### Изменения в базах
