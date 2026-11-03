@@ -1,5 +1,31 @@
 # История изменений compact geo
 
+## 2026-11-03 10:41 UTC
+
+### Изменения в базах
+
+| Список | Было | Стало | + | − |
+| --- | ---: | ---: | ---: | ---: |
+| geosite category-ru | 1146 | 1148 | 2 | 0 |
+| geosite category-ads | 845 | 845 | 0 | 0 |
+| geosite private | 133 | 133 | 0 | 0 |
+| geoip ru | 25157 | 25157 | 0 | 0 |
+| geoip private | 28 | 28 | 0 | 0 |
+
+| Файл | sha256 (было) | sha256 (стало) |
+| --- | --- | --- |
+| `geoip-compact.dat` | `d3981943e89b` | `c89b0b6cf89e` |
+| `geosite-compact.dat` | `3568a702c168` | `23e89adee6d2` |
+| `geoip-ru.srs` | `723d40bf23f2` | `723d40bf23f2` |
+| `geosite-category-ru.srs` | `bb9c3f62ae80` | `82b68de0a09b` |
+
+<details><summary>Примеры +/− (кратко)</summary>
+
+**geosite category-ru**
+- добавлено: `beget.email`, `zapishu.me`
+
+</details>
+
 ## 2026-11-01 10:17 UTC
 
 ### Изменения в базах
