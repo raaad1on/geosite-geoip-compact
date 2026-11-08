@@ -1,5 +1,31 @@
 # История изменений compact geo
 
+## 2026-11-08 10:05 UTC
+
+### Изменения в базах
+
+| Список | Было | Стало | + | − |
+| --- | ---: | ---: | ---: | ---: |
+| geosite category-ru | 1148 | 1149 | 1 | 0 |
+| geosite category-ads | 849 | 849 | 0 | 0 |
+| geosite private | 133 | 133 | 0 | 0 |
+| geoip ru | 25244 | 25244 | 0 | 0 |
+| geoip private | 28 | 28 | 0 | 0 |
+
+| Файл | sha256 (было) | sha256 (стало) |
+| --- | --- | --- |
+| `geoip-compact.dat` | `a91699592e51` | `3644013c95cd` |
+| `geosite-compact.dat` | `6bfb5430fae6` | `3591eccf3bc3` |
+| `geoip-ru.srs` | `1d13b1fde576` | `1d13b1fde576` |
+| `geosite-category-ru.srs` | `82b68de0a09b` | `c21a4924c75e` |
+
+<details><summary>Примеры +/− (кратко)</summary>
+
+**geosite category-ru**
+- добавлено: `otzovik.com`
+
+</details>
+
 ## 2026-11-07 09:51 UTC
 
 ### Изменения в базах
