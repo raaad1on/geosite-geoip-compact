@@ -1,5 +1,31 @@
 # История изменений compact geo
 
+## 2026-11-10 10:56 UTC
+
+### Изменения в базах
+
+| Список | Было | Стало | + | − |
+| --- | ---: | ---: | ---: | ---: |
+| geosite category-ru | 1149 | 1150 | 1 | 0 |
+| geosite category-ads | 849 | 849 | 0 | 0 |
+| geosite private | 133 | 133 | 0 | 0 |
+| geoip ru | 25244 | 25244 | 0 | 0 |
+| geoip private | 28 | 28 | 0 | 0 |
+
+| Файл | sha256 (было) | sha256 (стало) |
+| --- | --- | --- |
+| `geoip-compact.dat` | `a91699592e51` | `a91699592e51` |
+| `geosite-compact.dat` | `3591eccf3bc3` | `7d5b54afe1ab` |
+| `geoip-ru.srs` | `1d13b1fde576` | `1d13b1fde576` |
+| `geosite-category-ru.srs` | `c21a4924c75e` | `7bbd4eeb2c1c` |
+
+<details><summary>Примеры +/− (кратко)</summary>
+
+**geosite category-ru**
+- добавлено: `megabitus.com`
+
+</details>
+
 ## 2026-11-09 11:13 UTC
 
 ### Изменения в базах
