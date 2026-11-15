@@ -1,5 +1,31 @@
 # История изменений compact geo
 
+## 2026-11-15 10:38 UTC
+
+### Изменения в базах
+
+| Список | Было | Стало | + | − |
+| --- | ---: | ---: | ---: | ---: |
+| geosite category-ru | 1150 | 1151 | 1 | 0 |
+| geosite category-ads | 849 | 849 | 0 | 0 |
+| geosite private | 133 | 133 | 0 | 0 |
+| geoip ru | 25265 | 25265 | 0 | 0 |
+| geoip private | 28 | 28 | 0 | 0 |
+
+| Файл | sha256 (было) | sha256 (стало) |
+| --- | --- | --- |
+| `geoip-compact.dat` | `4127836400b4` | `39b16b4f17c7` |
+| `geosite-compact.dat` | `7d5b54afe1ab` | `5ae26229c616` |
+| `geoip-ru.srs` | `236a4c3e4725` | `236a4c3e4725` |
+| `geosite-category-ru.srs` | `7bbd4eeb2c1c` | `87ae2414803a` |
+
+<details><summary>Примеры +/− (кратко)</summary>
+
+**geosite category-ru**
+- добавлено: `vigo.tech`
+
+</details>
+
 ## 2026-11-13 10:46 UTC
 
 ### Изменения в базах
