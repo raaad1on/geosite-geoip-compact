@@ -1,5 +1,33 @@
 # История изменений compact geo
 
+## 2026-11-19 11:23 UTC
+
+### Изменения в базах
+
+| Список | Было | Стало | + | − |
+| --- | ---: | ---: | ---: | ---: |
+| geosite category-ru | 1151 | 1150 | 0 | 1 |
+| geosite category-ads | 849 | 850 | 1 | 0 |
+| geosite private | 133 | 133 | 0 | 0 |
+| geoip ru | 25265 | 25265 | 0 | 0 |
+| geoip private | 28 | 28 | 0 | 0 |
+
+| Файл | sha256 (было) | sha256 (стало) |
+| --- | --- | --- |
+| `geoip-compact.dat` | `4127836400b4` | `39b16b4f17c7` |
+| `geosite-compact.dat` | `5ae26229c616` | `48e90706aa62` |
+| `geoip-ru.srs` | `236a4c3e4725` | `236a4c3e4725` |
+| `geosite-category-ru.srs` | `87ae2414803a` | `6f4508a273e6` |
+
+<details><summary>Примеры +/− (кратко)</summary>
+
+**geosite category-ru**
+- удалено: `yandexwebcache.org`
+**geosite category-ads**
+- добавлено: `tencentads.com`
+
+</details>
+
 ## 2026-11-18 11:26 UTC
 
 ### Изменения в базах
