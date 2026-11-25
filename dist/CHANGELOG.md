@@ -1,5 +1,31 @@
 # История изменений compact geo
 
+## 2026-11-25 12:28 UTC
+
+### Изменения в базах
+
+| Список | Было | Стало | + | − |
+| --- | ---: | ---: | ---: | ---: |
+| geosite category-ru | 1150 | 1168 | 18 | 0 |
+| geosite category-ads | 850 | 850 | 0 | 0 |
+| geosite private | 133 | 133 | 0 | 0 |
+| geoip ru | 25365 | 25365 | 0 | 0 |
+| geoip private | 28 | 28 | 0 | 0 |
+
+| Файл | sha256 (было) | sha256 (стало) |
+| --- | --- | --- |
+| `geoip-compact.dat` | `2620a9ac0d5e` | `2620a9ac0d5e` |
+| `geosite-compact.dat` | `48e90706aa62` | `bf3df382a09d` |
+| `geoip-ru.srs` | `240822f5efcc` | `240822f5efcc` |
+| `geosite-category-ru.srs` | `6f4508a273e6` | `b538490764b4` |
+
+<details><summary>Примеры +/− (кратко)</summary>
+
+**geosite category-ru**
+- добавлено: `admkamyshin.info`, `barnaul.org`, `devmachine.ai`, `goodline.info`, `kaspiysk.org`, `kchr.info`, `khural.org`, `megafon.cloud`, `murom.info`, `novoshakhtinsk.org`, `ntagil.org`, `o7.com` … (+6)
+
+</details>
+
 ## 2026-11-23 12:06 UTC
 
 ### Изменения в базах
